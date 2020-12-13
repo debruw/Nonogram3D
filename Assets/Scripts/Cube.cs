@@ -5,27 +5,37 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    public int number;
-    public TextMeshProUGUI text;
+    public int CanvasNumber1, CanvasNumber2;
+    public GameObject Canvas1, Canvas2;
     public GameObject SelectCorners, Corners;
     public Material FinalMaterial;
+    public Material WrongDestroyMaterial;
+    public MeshRenderer CubeMesh;
+    bool isWrongTile;
 
     private void Start()
     {
-        text.text = number.ToString();
+        //Canvas1.GetComponentInChildren<TextMeshProUGUI>().text = CanvasNumber1.ToString();
+        //Canvas2.GetComponentInChildren<TextMeshProUGUI>().text = CanvasNumber2.ToString();
     }
 
-    public MeshRenderer CubeMesh;
-    private void OnMouseUpAsButton()
+    public void CheckAndDestroyCube()
     {
-        DestroyCube();
-    }
-
-    public void DestroyCube()
-    {
-        Debug.Log("Clicked");
-        //When clicked destroy object with animation
-        GetComponent<Animator>().SetTrigger("DestroyCube");
+        //Tıklandığında objeyi kontrol et
+        if (GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Contains(this))
+        {//Yok edilmesi gerekenler listesinde ise
+         //Doğru
+            GetComponent<Animator>().SetTrigger("DestroyCube");
+        }
+        else
+        {//Yol edilmesi gereknler listesinde değil ise
+            //Yanlış
+            //isWrongTile = true;
+            //CubeMesh.material = WrongDestroyMaterial;
+            Corners.gameObject.SetActive(false);
+            Debug.Log("Lose live");
+            GetComponentInParent<CubeManager>().gameManager.LoseLive();
+        }
     }
 
     private void OnMouseDown()
@@ -43,7 +53,7 @@ public class Cube : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (GetComponentInParent<CubeManager>().isDragging)
+        if (GetComponentInParent<CubeManager>().isDragging && !GetComponentInParent<CubeManager>().SwipeList.Contains(this))
         {
             GetComponentInParent<CubeManager>().AddSwipeList(this);
             SelectCorners.SetActive(true);
@@ -52,24 +62,18 @@ public class Cube : MonoBehaviour
 
     public void DestroyAnimationEnd()
     {
+        GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Remove(this);
         gameObject.SetActive(false);
-        if (GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Contains(this))
-        {//Yok edilmesi gerekenler listesinde
-            //Doğru
-            GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Remove(this);
-        }
-        else
-        {//Yol edilmesi gereknler listesnde değil
-            //Yanlış
-            //GetComponentInParent<CubeManager>().isWrongCubeDestroyed = true;
-            GetComponentInParent<CubeManager>().gameManager.LoseLive();
-        }
     }
 
     public void ColorIt()
     {
-        CubeMesh.material = FinalMaterial;
-        Corners.SetActive(false);
-        text.gameObject.SetActive(false);
+        if (!isWrongTile)
+        {
+            CubeMesh.material = FinalMaterial;
+            Corners.SetActive(false);
+            Canvas1.gameObject.SetActive(false);
+            Canvas2.gameObject.SetActive(false);
+        }
     }
 }
