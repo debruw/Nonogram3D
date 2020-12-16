@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Image[] LiveImages;
     bool isGameEnd;
     public int currentLevel = 1;
-    int MaxLevelNumber = 4;
+    int MaxLevelNumber = 8;
 
     #region UI Elements
     public GameObject WinPanel, LosePanel, InGamePanel;
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitAndGameWin()
     {
+        cubeManager.PlaceFinalObject();
         yield return new WaitForSeconds(1);
         SoundManager.Instance.StopAllSounds();
         SoundManager.Instance.playSound(SoundManager.GameSounds.Win);

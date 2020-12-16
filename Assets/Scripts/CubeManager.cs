@@ -20,7 +20,6 @@ public class CubeManager : MonoBehaviour
     {
         foreach (Cube cube in SwipeList)
         {
-            cube.SelectCorners.SetActive(false);
             cube.CheckAndDestroyCube();
         }
         SwipeList.Clear();
@@ -32,7 +31,11 @@ public class CubeManager : MonoBehaviour
         foreach (Cube cube in CubesWillBeColored)
         {
             cube.ColorIt();
-        }
+        }        
+    }
+
+    public void PlaceFinalObject()
+    {
         FinalObject.transform.DOMove(new Vector3(0, FinalObject.transform.position.y, 0), 1);
         FinalObject.transform.DORotate(new Vector3(0, 45, 0), 1);
     }

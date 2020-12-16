@@ -5,18 +5,13 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    public int CanvasNumber1, CanvasNumber2;
-    public GameObject Canvas1, Canvas2;
-    public GameObject SelectCorners, Corners;
-    public Material FinalMaterial;
-    public Material WrongDestroyMaterial;
     public MeshRenderer CubeMesh;
-    bool isWrongTile;
+    public GameObject SelectCorners;
 
     private void Start()
     {
-        //Canvas1.GetComponentInChildren<TextMeshProUGUI>().text = CanvasNumber1.ToString();
-        //Canvas2.GetComponentInChildren<TextMeshProUGUI>().text = CanvasNumber2.ToString();
+        colorStep = 1f / (float)GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Count;
+        StartColor = CubeMesh.material.color;
     }
 
     public void CheckAndDestroyCube()
@@ -30,9 +25,6 @@ public class Cube : MonoBehaviour
         else
         {//Yol edilmesi gereknler listesinde değil ise
             //Yanlış
-            //isWrongTile = true;
-            //CubeMesh.material = WrongDestroyMaterial;
-            Corners.gameObject.SetActive(false);
             Debug.Log("Lose live");
             GetComponentInParent<CubeManager>().gameManager.LoseLive();
         }
@@ -48,7 +40,7 @@ public class Cube : MonoBehaviour
     private void OnMouseUp()
     {
         GetComponentInParent<CubeManager>().ClearSwipeList();
-        GetComponentInParent<CubeManager>().isDragging = false;
+        GetComponentInParent<CubeManager>().isDragging = false;        
     }
 
     private void OnMouseEnter()
@@ -63,17 +55,16 @@ public class Cube : MonoBehaviour
     public void DestroyAnimationEnd()
     {
         GetComponentInParent<CubeManager>().CubesWillBeDestroyed.Remove(this);
+        GetComponentInParent<CubeManager>().ColorAllCubes();
         gameObject.SetActive(false);
     }
 
+    float colorStep;
+    public Color FinalColor;
+    Color StartColor;
     public void ColorIt()
     {
-        if (!isWrongTile)
-        {
-            CubeMesh.material = FinalMaterial;
-            Corners.SetActive(false);
-            Canvas1.gameObject.SetActive(false);
-            Canvas2.gameObject.SetActive(false);
-        }
+        CubeMesh.material.color = Color.Lerp(StartColor, FinalColor, colorStep);
+        colorStep += colorStep;
     }
 }
