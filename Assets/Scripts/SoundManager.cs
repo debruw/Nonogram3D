@@ -17,7 +17,8 @@ public class SoundManager : MonoBehaviour
         Music,
         Lose,
         Win,
-        LiveLose
+        LiveLose,
+        Pop
     }
 
     private void Awake()

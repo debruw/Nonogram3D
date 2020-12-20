@@ -20,12 +20,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _Size: 2
+    - _Size: 2.5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _Vibrancy: 0
+    - _Vibrancy: 0.7
     m_Colors:
-    - _TintColor: {r: 0, g: 0, b: 0, a: 0.7490196}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0}

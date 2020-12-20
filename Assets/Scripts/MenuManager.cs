@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public int currentLevel;
-    int MaxLevelNumber = 4;
+    int MaxLevelNumber = 20;
     int rand;
 
     // Start is called before the first frame update
@@ -20,23 +20,21 @@ public class MenuManager : MonoBehaviour
         Debug.Log(currentLevel);
         if (currentLevel > MaxLevelNumber)
         {
-            currentLevel = 1;
-            PlayerPrefs.SetInt("LevelId", currentLevel);
-            SceneManager.LoadScene("Level" + currentLevel);
-            //if (currentLevel != PlayerPrefs.GetInt("LastRandomLevel") && PlayerPrefs.GetInt("LastRandomLevel") != 0)
-            //{
+            if (currentLevel != PlayerPrefs.GetInt("LastRandomLevel") && PlayerPrefs.GetInt("LastRandomLevel") != 0)
+            {
 
-            //}
-            //rand = Random.Range(1, MaxLevelNumber);
-            //if (rand == PlayerPrefs.GetInt("LastRandomLevel"))
-            //{
-            //    rand = Random.Range(1, MaxLevelNumber);
-            //}
-            //SceneManager.LoadScene("Level" + rand);
+            }
+            rand = Random.Range(1, MaxLevelNumber);
+            if (rand == PlayerPrefs.GetInt("LastRandomLevel"))
+            {
+                rand = Random.Range(1, MaxLevelNumber);
+            }
+            SceneManager.LoadScene("Level" + rand);
         }
         else
         {
             SceneManager.LoadScene("Level" + currentLevel);
         }
+        PlayerPrefs.SetInt("FromMenu", 1);
     }
 }

@@ -40,7 +40,7 @@ public class CubeManager : MonoBehaviour
         FinalObject.transform.DORotate(new Vector3(0, 45, 0), 1);
     }
 
-    public void CloseAllCubes()
+    public void CloseAllCubeScripts()
     {
         foreach (Cube cube in CubesWillBeColored)
         {
