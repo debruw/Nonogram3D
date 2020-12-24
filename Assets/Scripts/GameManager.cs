@@ -68,7 +68,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    float counter;
+    public GameObject ContinueTutorial;
     private void Update()
     {
         if (isGameEnd || !isGameStarted)
@@ -114,6 +115,22 @@ public class GameManager : MonoBehaviour
                     break;
             }
             StartCoroutine(WaitAndGameLose());
+        }
+        if (Input.GetMouseButton(0))
+        {
+            if (ContinueTutorial.activeSelf)
+            {
+                counter = 0;
+                ContinueTutorial.SetActive(false);
+            }
+        }
+        else
+        {
+            counter += Time.deltaTime;
+            if (counter >= 2f)
+            {                
+                ContinueTutorial.SetActive(true);
+            }
         }
     }
 

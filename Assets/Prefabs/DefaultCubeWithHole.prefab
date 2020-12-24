@@ -1020,6 +1020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CubeMesh: {fileID: 1043649539129908545}
   SelectCorners: {fileID: 7656751754165477735}
+  SelectMaterial: {fileID: 2100000, guid: b7573c50dcdd18c4e9672f37bcdbfa69, type: 2}
   FinalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &6801054080019372915
 BoxCollider:

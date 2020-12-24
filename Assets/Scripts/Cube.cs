@@ -30,7 +30,8 @@ public class Cube : MonoBehaviour
             SelectCorners.SetActive(false);
         }
     }
-
+    
+    public Material SelectMaterial;
     private void OnMouseDown()
     {
         if (!GetComponentInParent<CubeManager>().gameManager.isGameStarted || GetComponentInParent<CubeManager>().gameManager.isGameEnd)
@@ -40,6 +41,7 @@ public class Cube : MonoBehaviour
         GetComponentInParent<CubeManager>().isDragging = true;
         GetComponentInParent<CubeManager>().AddSwipeList(this);
         SelectCorners.SetActive(true);
+        CubeMesh.material = SelectMaterial;
     }
 
     private void OnMouseUp()
@@ -62,6 +64,7 @@ public class Cube : MonoBehaviour
         {
             GetComponentInParent<CubeManager>().AddSwipeList(this);
             SelectCorners.SetActive(true);
+            CubeMesh.material = SelectMaterial;
         }
     }
 

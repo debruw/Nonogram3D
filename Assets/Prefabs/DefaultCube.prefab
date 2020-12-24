@@ -578,6 +578,7 @@ GameObject:
   - component: {fileID: 9105954157123124896}
   - component: {fileID: 6801054080019372915}
   - component: {fileID: 3359187602000665799}
+  - component: {fileID: 9084218545891300020}
   m_Layer: 0
   m_Name: DefaultCube
   m_TagString: Untagged
@@ -614,6 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CubeMesh: {fileID: 3828778650801892174}
   SelectCorners: {fileID: 7656751754165477735}
+  SelectMaterial: {fileID: 2100000, guid: b7573c50dcdd18c4e9672f37bcdbfa69, type: 2}
   FinalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &6801054080019372915
 BoxCollider:
@@ -647,6 +649,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &9084218545891300020
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801054080019372914}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7656751754165477735
 GameObject:
   m_ObjectHideFlags: 0
