@@ -127,9 +127,12 @@ public class GameManager : MonoBehaviour
         else
         {
             counter += Time.deltaTime;
-            if (counter >= 2f)
-            {                
-                ContinueTutorial.SetActive(true);
+            if (counter >= 5f)
+            {
+                if (!ContinueTutorial.activeSelf)
+                {
+                    ContinueTutorial.SetActive(true); 
+                }
             }
         }
     }
